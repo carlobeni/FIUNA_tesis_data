@@ -1,0 +1,46 @@
+%---------------- Margenes de pagina------------------------%
+% \setlength{\voffset}{-1 cm}
+% \setlength{\topmargin}{0 mm}
+% \setlength{\headheight}{8mm}
+% \setlength{\headsep}{0.7 mm}
+% \setlength{\textheight}{245 mm}
+% \setlength{\footskip}{ 27 mm}
+
+%\setlength{\hoffset}{-1.54 cm}
+% \setlength{\oddsidemargin}{0.5 cm}
+% \setlength{\textwidth}{185 mm}
+% \setlength{\marginparsep}{0 mm}
+% \setlength{\marginparpush}{0 mm}
+% \setlength{\marginparwidth}{0 mm}
+
+%---------------- Lista de paquetes utilizados -------------%
+
+\usepackage[utf8]{inputenc}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{lipsum}
+\renewcommand{\figurename}{\textbf{Fig.}}
+\renewcommand{\tablename}{\textsc{Tabla}}
+\usepackage{amsmath}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=white,
+    outerlinewidth=0pt,
+    roundcorner=0pt,
+    innertopmargin=1pt,
+    innerbottommargin=1pt,
+    innerrightmargin=0pt,
+    innerleftmargin=0pt,
+    backgroundcolor=gray!15}
+\usepackage{booktabs}
+%---------------- Definición de variables globales --------%
+\def\titulo{\title}
+\def\autor{\author}
+\def\direccion{\address}
+\usepackage{float}
+\usepackage{fancyhdr}
+\chead{\footnotesize\itshape \@title}
+\lhead{}
+\rhead{}
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{flushend}
+\usepackage{makecell}

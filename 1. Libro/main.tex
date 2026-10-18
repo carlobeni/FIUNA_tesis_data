@@ -1,0 +1,195 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    Formato de memoria de Trabajo Final de Grado (TFG) para la Facultad de Ingeniería de la Universidad Nacional de Asunción.
+
+%   Version 2.0.1 por Msc. Ing. Sergio Ramón Toledo Gallardo del 10 de junio de 2015                           
+%- La compilación debe realizarse utilizando el comando pdflatex o pdflatexmk (para Mac)%
+% Los programas necesarios son Miktex 2.9 (distribución latex) y algún procesador como el texmaks o texniccenter
+%- Para texnicCenter Usar makeindex y habilitar usar bibtex
+%- Al imprimir el PDF se debe seleccionar tamaño real y Elegir origen por tamaño de pagina PDF para respetar los margenes requeridos   
+%- Las figuras deben cargarse en la carpeta "figures" en formato pdf para optimizar la velocidad de compilación, sin embargo también se permiten formatos jpg y eps.
+%- Las referencia bibliográficas se cargan en el archivo    fiuna.bib                                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[oneside, a4paper, 12pt]{fiuna}
+\usepackage{pdfpages}
+\usepackage{fiuna}
+\makeatletter
+\def\input@path{{}{1. Libro/}}
+\makeatother
+
+\usepackage[pdftex,bookmarks=true]{hyperref}%%Agregado para generar bookmarks ,
+\hypersetup{unicode=true}
+\makeatletter
+\def\NR@gettitle#1{\def\@currentlabelname{}}
+\makeatother
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{graphicx}
+\graphicspath{{}{../}}
+\usepackage{subcaption} % subfiguras
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\setcounter{secnumdepth}{3}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{tabularx} % in the preamble
+\usepackage{stfloats}
+\usepackage[nohyperlinks]{acronym}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{pdflscape}
+\usepackage{caption}
+% \renewcommand{\listingname}{code}
+
+%\setcounter{tocdepth}{3}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage[spanish]{babel}
+\addto\captionsspanish{%
+  \renewcommand{\lstlistingname}{Listado}%
+  \renewcommand{\lstlistlistingname}{Índice de listados}%
+}
+%\usepackage{babel}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{appendix}
+
+\usepackage{lscape}
+% \usepackage{trace} % Solo para depuración: ralentiza mucho la compilación y bloquea la previsualización.
+%\usepackage[table,xcdraw]{xcolor}
+
+\usepackage{algorithmic}
+
+\usepackage[ruled, linesnumbered]{algorithm2e}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage[sort&compress,numbers]{natbib}
+\hbadness=10000
+\hfuzz=25pt
+
+
+\definecolor{vgreen}{RGB}{104,180,104}
+\definecolor{vblue}{RGB}{49,49,255}
+\definecolor{vorange}{RGB}{255,143,102}
+
+\newcommand{\uniformtablestyle}{%
+    \footnotesize
+    \renewcommand{\arraystretch}{1.12}%
+    \setlength{\tabcolsep}{5pt}%
+}
+
+\lstdefinestyle{python-style}
+{
+    language=Python,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue}, 
+    identifierstyle=\color{black},
+    commentstyle=\color{vgreen},
+    stringstyle=\color{red},
+    tabsize=4,
+    moredelim=*[s][\colorIndex]{[}{]},
+    literate=*{:}{:}1,
+    lineskip=-1pt
+}
+
+\lstdefinestyle{matlab-style}
+{
+    language=Matlab,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{vgreen},
+    stringstyle=\color{purple},
+    tabsize=4,
+    moredelim=*[s][\colorIndex]{[}{]},
+    literate=*{:}{:}1,
+    lineskip=-1pt,
+}
+
+\lstset{
+ morekeywords={E, S, G, F, X, Z, T, M},
+ alsoother={0,1,2,3,4,5,6,7,8,9}
+}
+
+\lstdefinestyle{gcode-style}
+{
+    keywordstyle=\color{vgreen},
+    basicstyle=\small\ttfamily,
+    tabsize=4,
+    moredelim=*[s][\colorIndex]{[}{]},
+    literate=*{:}{:}1,
+    lineskip=-1pt,
+}
+
+
+\makeatletter
+\newcommand*\@lbracket{[}
+\newcommand*\@rbracket{]}
+\newcommand*\@colon{:}
+\newcommand*\colorIndex{%
+    \edef\@temp{\the\lst@token}%
+    \ifx\@temp\@lbracket \color{black}%
+    \else\ifx\@temp\@rbracket \color{black}%
+    \else\ifx\@temp\@colon \color{black}%
+    \else \color{vorange}%
+    \fi\fi\fi
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               Inicio del documento                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{document}
+
+% Definir el nombre de los autores
+\autor[Carlos Benítez]{Carlos María Benítez Cardozo}
+
+% Definir el titulo de la tesis
+\titulo{Prototipo de Procesamiento Local para la Detección, Clasificación y Análisis Predictivo de Manchas Solares mediante Visión Computacional e Inteligencia Artificial}
+
+% Definir el nombre de la carrera
+\carrera{Ingenier\'ia Mecatr\'onica}
+
+% Definir el nombre de los tutores
+\asesor{Dr. Ing. Diego Stalder}
+\asesor{Dr. Ing. Juan Cabral}
+\asesor{Dr. Jos\'e Mar\'ia G\'omez}
+\asesor{Dr. Ing. Christian Schaerer}
+\asesor{MSc. Jes\'us N\'u\~nez}
+
+% Definir ciudad de presentación
+\ciudad{San Lorenzo}
+
+%%%%%% A quien se dedique %%%%%%%%%%%%%%
+\pagenumbering{roman}
+\preliminares
+\pagenumbering{arabic}
+
+% Índices. Se mantienen juntos después del índice general para facilitar la navegación.
+\tableofcontents
+\listoffigures
+\listoftables
+\chapter*{Lista de siglas}
+\input{acronimos.tex}
+\listofappendices
+
+% Capitulos
+\formatoTitulos
+\input{capitulo1}
+\input{capitulo2} 
+\input{capitulo3} 
+\input{capitulo4} 
+\input{capitulo5}
+\input{capitulo6}
+\input{capitulo7}
+
+% Bibliografía
+%Cargar los libros en formato bibtex en el archivo fiuna.bib
+\formatoIndice
+\bibliographystyle{fiuna}
+\bibliography{fiuna}
+
+% Anexos
+\input{anexos}
+\end{document}

@@ -1,0 +1,286 @@
+%%Paquete adicional para Formato de memoria de TFG para la Facultad de Ingeniería de la Universidad Nacional de Asunción
+%Version 2.0 por Msc. Ing. Sergio Ramón Toledo Gallardo
+%%10 de junio de 2015
+
+%-------Hoja A4 y margenes----------%
+
+\setlength{\hoffset}{9.6mm}
+\setlength{\voffset}{-20 mm}
+\setlength{\oddsidemargin}{0 mm}
+\setlength{\topmargin}{0 mm}
+\setlength{\headheight}{25mm}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{150 mm}
+\setlength{\textheight}{235 mm}
+\setlength{\marginparsep}{0 mm}
+\setlength{\footskip}{14mm}
+\setlength{\marginparpush}{5pt}
+\setlength{\marginparwidth}{25mm}
+
+%-------Tipo de letra arial---------%
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arial
+%-----Bibliografía especial-------%
+% \usepackage{cite}
+% \usepackage[numbers]{natbib}
+
+
+%%%%%%%%%   Paquete para figuras  %%%%%%%%%%%%%%%%%%
+
+\usepackage{float}
+\usepackage{graphicx}
+
+%%%%%%%%% Paquete para escritura en español %%%%%%%% 
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+%----Paquetes para los titulos de graficos y tablas
+
+\usepackage{caption}
+\captionsetup{font=normal,labelfont=bf}
+\usepackage{booktabs}
+%-------Interlineado-------------%
+\usepackage{setspace}
+\doublespacing
+
+%----encabezado personalizado-----------------%
+\usepackage{fancyhdr}
+
+
+%----entrada normal de texto por teclado----%
+\usepackage[utf8]{inputenc}
+\graphicspath{{imagenes//}}
+
+\renewcommand{\spanishtablename}{\sf \textbf{Tabla}}
+\renewcommand{\spanishfigurename}{\sf \textbf{Figura}}
+\renewcommand{\spanishcontentsname}{\'Indice general}
+\renewcommand\spanishchaptername{CAP\'ITULO}
+\renewcommand{\spanishappendixname}{AP\'ENDICE}
+\renewcommand{\spanishbibname}{BIBLIOGRAF\'IA}
+\renewcommand{\spanishlistfigurename}{\'Indice de figuras}
+\renewcommand{\spanishlisttablename}{\'Indice de tablas}
+
+
+%\def\autor[#1]#2{\gdef\@autor{#1}\gdef\@autorpie}
+\def\titulo#1{\gdef\@titulo{#1}}
+\def\carrera#1{\gdef\@carrera{#1}}
+\def\ciudad#1{\gdef\@ciudad{#1}}
+\def\anho#1{\gdef\@anho{#1}}
+\def\dedicatoria#1{\gdef\@dedicatoria{#1}}
+
+\newcounter{dal@autornum}
+\setcounter{dal@autornum}{0}
+\def\autor[#1]#2{%
+   \ifnum\value{dal@autornum}=2
+      \ClassWarningNoLine{TesisFiuna}%
+         {Lo siento, solo se permiten hasta dos autores}%
+   \else
+      \addtocounter{dal@autornum}{1}%
+      \def\@tempaa{@\ifcase\value{dal@autornum}\or
+         primer\or segundo\or tercer\or cuarto\or quinto\fi}%
+      \expandafter\gdef\csname \@tempaa autor\endcsname{#2}%
+      \expandafter\gdef\csname \@tempaa autorcorto\endcsname{#1}%
+      \ifnum\value{dal@autornum}>1%
+         \csname dal\@tempaa @autorSi\endcsname%
+      \fi%
+   \fi%
+}
+
+
+\newcounter{dal@asesornum} 
+\setcounter{dal@asesornum}{0}
+\def\asesor#1{%
+   \ifnum\value{dal@asesornum}=5
+      \ClassWarningNoLine{TesisFiuna}%
+         {Lo siento, solo se permiten hasta 5 asesores}%
+   \else
+      \addtocounter{dal@asesornum}{1}%
+      \def\@tempa{@\ifcase\value{dal@asesornum}\or
+         primer\or segundo\or tercer\or cuarto\fi}%
+      \expandafter\gdef\csname \@tempa asesor\endcsname{#1}%
+      \ifnum\value{dal@asesornum}>1%
+         \csname dal\@tempa @asesorSi\endcsname%
+      \fi%
+   \fi%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------Paginas preliminares----------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\preliminares{
+
+%------------Portada--------------%
+
+\thispagestyle{empty} % no imprimir ni número, ni cabecera ni pie de página
+\vspace*{5mm}
+\begin{center}
+\textbf{\LARGE UNIVERSIDAD NACIONAL DE ASUNCI\'ON \\ \vspace{24pt}
+\LARGE Facultad de Ingenier\'ia\\
+\vspace{-12pt}
+\LARGE \@carrera\\} 
+
+\vspace{24pt} 
+\begin{figure}[h]
+	\centering
+		\IfFileExists{1. Libro/escudouna.pdf}{%
+			\includegraphics[width=50mm]{1. Libro/escudouna.pdf}%
+		}{%
+			\includegraphics[width=50mm]{escudouna.pdf}%
+		}%
+	\label{fig:escudouna}
+\end{figure}
+%\vspace{12pt}
+\textbf{\large \@titulo\\}
+\vspace{36pt}
+%%%%%%%%%%%%%%%%Autores%%%%%%%%%%%%%%%%%%%%%%%%
+\ifnum\value{dal@autornum}=1%
+                \Large\@primerautor
+        \fi
+\ifnum\value{dal@autornum}=2%
+                \Large\@primerautor \\
+                \Large\@segundoautor \\
+        \fi
+
+\vspace{10pt} % era 35mm
+
+%%%%%%%%%%%%%%%%Asesores%%%%%%%%%%%%%%%%%%%%%%%
+% \ifnum\value{dal@asesornum}=1%
+%                 Asesor: \\
+%                 \@primerasesor
+%                 \vspace{36pt}
+%         \fi
+% \ifnum\value{dal@asesornum}=2%
+% 				Asesores:
+
+% \@primerasesor \\
+% \@segundoasesor \\
+% \vspace{24pt}
+% 	\fi
+% \ifnum\value{dal@asesornum}=3%
+% 	Asesores:
+
+% \@primerasesor \\
+% \@segundoasesor \\
+% \@tercerasesor
+% \vspace{12pt}
+% \fi
+\vspace{5px}
+\Large\@ciudad \ - Paraguay
+\\
+\the\year
+\end{center}
+
+%------Fin de la Portada-----%%%%%%%
+
+%----Definicion de encabezado y pie de página------------%
+
+% \usepackage{setspace}
+\pagestyle{fancy}
+
+%\headheight{35mm}
+\newcommand{\tituloUp}{\expandafter\MakeUppercase\expandafter{\@titulo}}
+
+%-----Encabezado----%
+\makeatletter
+\newcommand\tinyv{\@setfontsize\tinyv{4pt}{6}}
+\makeatother
+\fancyhead[L]{{\footnotesize{Universidad Nacional de Asunción}}\\
+{\footnotesize{Trabajo Final de Grado}}\\
+{\footnotesize{\ \ }}\\
+{\footnotesize{\ \ }}}
+
+\fancyhead[C]{\vspace*{-10mm}
+{\fontsize{16pt}{20pt}{{\ \ }}}\\
+{\fontsize{16pt}{20pt}{\ \ }}\\
+{\fontsize{16pt}{20pt}{{\ \ }}}\\
+{\fontsize{16pt}{20pt}{\ \ }}\\
+\setstretch{1}
+{\bfseries \scriptsize{\tituloUp}}}
+
+
+\fancyhead[R]{{\footnotesize{{\@carrera}}}\\
+{\footnotesize{Facultad de Ingeniería}}\\
+{\fontsize{10pt}{10pt}{\ \ }}\\
+{\fontsize{10pt}{10pt}{\ \ }}}
+
+
+%-----Pie de Pagina-----%
+\ifnum\value{dal@autornum}=1%
+
+\fancyfoot[C]{{\footnotesize{{\@primerautor}}}\\{\footnotesize\thepage}}
+        \fi
+\ifnum\value{dal@autornum}=2%
+\fancyfoot[L]{{\footnotesize{{\@primerautorcorto}}}}
+\fancyfoot[R]{{\footnotesize{{\@segundoautorcorto}}}}
+\fancyfoot[C]{\vspace{8pt}\\{\footnotesize\thepage}}
+        \fi
+
+        
+
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1.5pt}
+
+\fancypagestyle{plain}{%					% Permite que al comenzar los capítulos también obtengan el pagestyle <<fancy>>
+\thispagestyle{fancy}
+}
+%***********************
+
+\newpage
+\thispagestyle{fancy}
+\input{consejo}
+
+
+%% Para pagna exclusiva de agradecimiento 
+%\newpage
+%\textit{}
+%\vspace{90mm}
+%\begin{flushright}
+%\textit{\@dedicatoria}
+%\end{flushright}
+
+\newpage
+\input{agradecimientos}
+\newpage
+}
+
+%Fin de las páginas preliminares
+%------ Indice de anexos --------------------%
+\usepackage[titletoc,page]{appendix}
+\newcommand\listofappendixname{\'Indice de anexos}
+\newcommand\listofappendices{%
+
+  \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listofappendixname
+        \@mkboth{%
+           \MakeUppercase\listofappendixname}{\MakeUppercase\listofappendixname}}%
+    \@starttoc{loa}%
+    \if@restonecol\twocolumn\fi
+}
+\newcommand*\l@appendix{\@dottedtocline{1}{1.5em}{2.3em}}
+
+%--------------------------------------------%
+
+%----Titulos de Indices-------------------%
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\bf\large\filcenter}{\chaptertitlename\ \thechapter}{1pt}{}[]
+\titleformat{\section}[hang]{\bf\normalsize}{\thesection.}{5mm}{}
+\titleformat{\subsection}[hang]{\bf\normalsize}{\thesubsection.}{5mm}{}
+\titlespacing*{\chapter}{0pt}{-1.5\baselineskip}{1\baselineskip}
+
+\def\formatoIndice{
+\titleformat{\chapter}[display]{\bf\large\filcenter}{\chaptertitlename\ \thechapter}{1pt}{}[]
+\titlespacing*{\chapter}{0pt}{-1.5\baselineskip}{1\baselineskip}
+}
+%--------------------------------------------%
+
+%----Titulos de capitulos-------------------%
+\def\formatoTitulos{
+\titleformat{\chapter}[display]{\bf\normalsize\filcenter}{\chaptertitlename\ \thechapter}{1pt}{}[]
+\titlespacing*{\chapter}{0pt}{72pt}{1\baselineskip}
+}
+%--------------------------------------------%

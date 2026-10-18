@@ -1,0 +1,69 @@
+%%% Plantilla latex para Resumen Ejecutivo de la FIUNA.
+
+\documentclass[final,times,twocolumn,5p]{ResumenEjecutivoLocal}
+\usepackage{ResumenEjecutivoLocal}
+\makeatletter
+\def\input@path{{}{2. Resumen Ejecutivo/}{1. Libro/}}
+\makeatother
+\usepackage{graphicx}
+\usepackage{url}
+\hypersetup{hypertexnames=false}
+\graphicspath{{../figures/}{../}{../1. Libro/}{2. Resumen Ejecutivo/}{figures/}{1. Libro/}}
+\hbadness=10000
+\vbadness=10000
+\hfuzz=2pt
+\emergencystretch=2em
+\begin{document}
+\begin{frontmatter}
+
+\titulo{Desarrollo de un Prototipo de Procesamiento Local para la Detección, Clasificación y Análisis Predictivo de Manchas Solares mediante Visión Computacional e IA}
+
+\author[dir0]{Carlos Benítez\fnref{nota0}}
+\address[dir0]{Tesista, Facultad de Ingeniería, Universidad Nacional de Asunción, Paraguay}
+\fntext[nota0]{Alumno de Ingeniería Mecatrónica de la Facultad de Ingeniería, Universidad Nacional de Asunción, Paraguay.}
+
+\address[dir1]{Tutores, Facultad de Ingeniería, Universidad Nacional de Asunción, Paraguay}
+\address[dir2]{Tutores, Facultad Politécnica, Universidad Nacional de Asunción, Paraguay}
+\fntext[nota1]{Tutores del Trabajo Final de Grado.}
+\author[dir2]{Dr. Ing. Juan Cabral\fnref{nota1}}
+\author[dir1]{Dr. Ing. Diego Stalder\fnref{nota1}}
+\author[dir2]{Dr. José María Gómez\fnref{nota1}}
+\author[dir2]{Dr. Ing. Christian Schaerer\fnref{nota1}}
+\author[dir1]{MSc. Jesús Núñez\fnref{nota1}}
+
+\begin{palabrasclave}
+Manchas solares \sep Visión computacional \sep Inteligencia artificial \sep Zurich--McIntosh \sep PVL--Kalman \sep DMD \sep YOLO26n \sep ConvNeXtV2a \sep Raspberry Pi 5
+\end{palabrasclave}
+
+\begin{keyword}
+Sunspots \sep Computer vision \sep Artificial intelligence \sep Zurich--McIntosh \sep PVL--Kalman \sep DMD \sep YOLO26n \sep ConvNeXtV2a \sep Raspberry Pi 5
+\end{keyword}
+
+\begin{abstract}
+This work develops a functional prototype for the local detection, classification, and predictive analysis of sunspots using computer vision and artificial intelligence. The system integrates a processing pipeline that links image acquisition, metadata logging, database synchronization, local inference, and web-based visualization. The pipeline incorporates YOLO26 for active region grouping, a hierarchical ConvNeXtV2 model for Zurich--McIntosh classification that preserves the semantic dependencies among its components, and complementary predictive modules for sunspot number (via a PVL--Kalman filter) and latitudinal activity distribution (via Dynamic Mode Decomposition applied to the Spörer diagram). The prototype was validated through experimental metrics on a dataset constructed from SDO/HMI imagery and NOAA reports, local inference tests, and taxonomic consistency checks. Results show that the proposed architecture enables traceable, portable, and interpretable solar observations in local academic observatories \citep{ultralyticsYOLO26,woo2023convnextv2,raspberryPi5Docs2026}.
+\end{abstract}
+
+\begin{resumen}
+El presente trabajo desarrolla un prototipo funcional para la detección, clasificación y análisis predictivo local de manchas solares mediante visión computacional e inteligencia artificial. El sistema integra una cadena de procesamiento que vincula la adquisición de imágenes, el registro de metadatos, la sincronización con base de datos, la inferencia local y la visualización web. La cadena de procesamiento incorpora YOLO26 para el agrupamiento de regiones activas, un modelo jerárquico basado en ConvNeXtV2 para clasificación Zurich--McIntosh que preserva las dependencias semánticas entre sus componentes, y módulos predictivos complementarios para el número de manchas solares (mediante un filtro PVL--Kalman) y la distribución latitudinal de la actividad (mediante Descomposición en Modos Dinámicos aplicada al diagrama de Spörer). El prototipo fue validado mediante métricas experimentales sobre un conjunto de datos construido a partir de imágenes SDO/HMI y reportes NOAA, pruebas de inferencia local y verificación de consistencia taxonómica. Los resultados muestran que la arquitectura propuesta permite observaciones solares trazables, portables e interpretables en observatorios académicos locales \citep{ultralyticsYOLO26,woo2023convnextv2,raspberryPi5Docs2026}.
+\end{resumen}
+
+\end{frontmatter}
+\pagestyle{fancy}
+
+\input{capitulo1_introduccion.tex}
+\input{capitulo1_objetivos.tex}
+\input{capitulo2_resumen.tex}
+\input{capitulo3_resumen.tex}
+\input{capitulo4_resumen.tex}
+\input{capitulo5_resumen.tex}
+\input{capitulo6_resumen.tex}
+\input{capitulo7_resumen.tex}
+\input{agradecimientos.tex}
+
+\section{Referencias}
+\bibliographystyle{fiuna}
+\bibliography{fiuna}
+
+\input{anexos.tex}
+
+\end{document}

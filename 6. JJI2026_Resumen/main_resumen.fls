@@ -1,0 +1,119 @@
+PWD d:\papers\2.Tesis\root\6. JJI2026_Resumen
+INPUT C:\Users\Carlos Benitez\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT d:\papers\2.Tesis\root\6. JJI2026_Resumen\main_resumen.tex
+OUTPUT main_resumen.log
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\size11.clo
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\size11.clo
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\size11.clo
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\iftex\ifvtex.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\iftex\ifvtex.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\iftex\iftex.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\iftex\iftex.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\babel.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\babel.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\txtbabel.def
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\es\babel-spanish.tex
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\es\babel-spanish.tex
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\es\babel-spanish.tex
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\es\babel-es.ini
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\babel-spanish\spanish.ldf
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\babel-spanish\spanish.ldf
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\babel-spanish\spanish.ldf
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\fontenc.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\fontenc.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1095.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\helvet.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\helvet.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\ragged2e\ragged2e.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\ragged2e\ragged2e.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1phv.fd
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1phv.fd
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1phv.fd
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8t.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT .\main_resumen.aux
+INPUT .\main_resumen.aux
+INPUT main_resumen.aux
+OUTPUT main_resumen.aux
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8t.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi8.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy8.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8t.tfm
+INPUT ..\figures\DGICT_logo.png
+INPUT ..\figures\DGICT_logo.png
+INPUT ..\figures\DGICT_logo.png
+OUTPUT main_resumen.pdf
+INPUT ..\figures\DGICT_logo.png
+INPUT ..\figures\DGICT_logo.png
+INPUT ..\figures\DGICT_logo.png
+INPUT ..\figures\una_logo.png
+INPUT ..\figures\una_logo.png
+INPUT ..\figures\una_logo.png
+INPUT ..\figures\una_logo.png
+INPUT ..\figures\una_logo.png
+INPUT ..\figures\una_logo.png
+INPUT ..\figures\V1 - Color PT-BR PNG.png
+INPUT ..\figures\V1 - Color PT-BR PNG.png
+INPUT ..\figures\V1 - Color PT-BR PNG.png
+INPUT ..\figures\V1 - Color PT-BR PNG.png
+INPUT ..\figures\V1 - Color PT-BR PNG.png
+INPUT ..\figures\V1 - Color PT-BR PNG.png
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr8t.vf
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\base\8r.enc
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb8t.vf
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr8t.vf
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
+INPUT main_resumen.aux
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvb8a.pfb
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvb8a.pfb
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvr8a.pfb
+INPUT C:\Users\Carlos Benitez\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvr8a.pfb

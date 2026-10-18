@@ -1,0 +1,105 @@
+\mode<presentation>
+
+\newif\ifbeamer@secheader
+\beamer@secheaderfalse
+
+\ProcessOptionsBeamer
+
+% Reemplazamos smoothbars por una estructura personalizada con línea de progreso continua
+\useoutertheme{default}
+
+% Requerimos TikZ para dibujar la barra de progreso continua de forma exacta
+\usepackage{tikz}
+
+% --- DEFINICIÓN DE NUEVOS COLORES AZULADOS ELEGANTES ---
+\xdefinecolor{rojo-oscuro}{RGB}{20,55,108}      % Azul marino profundo y elegante (Navy Blue)
+\xdefinecolor{granate}{RGB}{11,32,68}          % Azul medianoche oscuro (Midnight Navy)
+\xdefinecolor{linea-progreso}{RGB}{212,175,55}  % Dorado noble (contraste distinguido con azul marino)
+\colorlet{azul-marino}{rojo-oscuro}
+\colorlet{azul-medianoche}{granate}
+
+\makeatletter 
+% Configuración del pie de página (ahora con negritas en todos los textos)
+\newcommand{\frameofframes}{/}
+\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
+\setbeamertemplate{footline} 
+  {%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+      \leavevmode{\usebeamerfont{author in head/foot}\textbf{\insertshortauthor}}%
+      \hfill%
+      {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\textbf{\insertshortinstitute}}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      {\usebeamerfont{title in head/foot}\textbf{\insertshorttitle}}%
+      \hfill%
+      {\usebeamerfont{frame number}\usebeamercolor[fg]{frame number}\textbf{\insertframenumber~\frameofframes~\inserttotalframenumber}}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+    \end{beamercolorbox}
+  }
+
+% --- BARRA SUPERIOR: TÍTULOS DE SECCIONES (EN NEGRITA) + LÍNEA DE PROGRESO CONTINUA ---
+\setbeamertemplate{headline}{%
+  % Sección de navegación (ahora descomentada y en negrita)
+  % \begin{beamercolorbox}[ht=3.5ex,dp=1.5ex]{section in head/foot}%
+  %   \bfseries\insertsectionnavigationhorizontal{\paperwidth}{\hskip0pt plus1fill}{\hskip0pt plus1fill}%
+  % \end{beamercolorbox}%
+  % Línea de progreso continua
+  \begin{beamercolorbox}[ht=2pt,dp=0pt,wd=\paperwidth]{lower separation line head}
+    \ifnum\inserttotalframenumber>1% Evita división por cero en la portada
+      \begin{tikzpicture}
+        \fill[color=granate] (0,0) rectangle (\paperwidth,2pt);
+        \fill[color=linea-progreso] (0,0) rectangle ({\insertframenumber/\inserttotalframenumber*\paperwidth},2pt);
+      \end{tikzpicture}%
+    \fi%
+  \end{beamercolorbox}%
+}
+\makeatother
+
+\useinnertheme{circles}
+
+% --- APLICACIÓN DE COLORES A LOS ELEMENTOS DE BEAMER ---
+\setbeamercolor{footline}{bg=rojo-oscuro}
+\setbeamercolor{author in head/foot}{bg=rojo-oscuro, fg=white}
+\setbeamercolor{title in head/foot}{bg=granate, fg=white}
+\setbeamercolor{section in head/foot}{bg=rojo-oscuro, fg=white}
+\setbeamercolor{section in head/foot shaded}{fg=white!60!rojo-oscuro}
+
+\setbeamercolor{frametitle}{bg=rojo-oscuro,fg=white}
+\setbeamercolor{title}{bg=rojo-oscuro}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamertemplate{bibliography item}[text]
+\setbeamertemplate{caption}[numbered]
+
+\setbeamercolor{palette primary}{use=structure,fg=white,bg=structure.fg}
+\setbeamercolor{palette secondary}{use=structure,fg=white,bg=structure.fg!75!black}
+\setbeamercolor{palette tertiary}{use=structure,fg=white,bg=structure.fg!50!black}
+\setbeamercolor{palette quaternary}{fg=white,bg=structure.fg!50!black}
+\setbeamercolor{titlelike}{parent=palette primary}
+
+\setbeamercolor{block title}{bg=rojo-oscuro,fg=white}
+\setbeamercolor*{block title example}{use={normal text,example text},bg=white,fg=rojo-oscuro}
+\setbeamercolor{fine separation line}{}
+\setbeamercolor{item projected}{fg=white,bg=granate}
+\setbeamercolor{structure}{fg=rojo-oscuro}
+
+\AtBeginSection[]{
+	\begin{frame}
+		\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+	\end{frame}
+}
+\AtBeginSubsection[]{
+	\begin{frame}
+		\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+	\end{frame}
+}
+
+\titlegraphic{\includegraphics[height=2cm]{logo_fiuna.png}} 
+% Nota: En tu archivo .tex principal, usa \frame[plain]{\titlepage} para que no herede la barra superior en la portada.
+
+\mode
+<all>

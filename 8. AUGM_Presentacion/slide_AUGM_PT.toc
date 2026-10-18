@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Introdução e Objetivos}{3}{0}{1}
+\beamer@sectionintoc {2}{Fundamentação Teórica}{6}{0}{2}
+\beamer@sectionintoc {3}{Projeto de Hardware}{8}{0}{3}
+\beamer@sectionintoc {4}{Projeto de Software}{10}{0}{4}
+\beamer@sectionintoc {5}{Resultados}{16}{0}{5}
+\beamer@sectionintoc {6}{Conclusões}{18}{0}{6}

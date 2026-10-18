@@ -1,0 +1,9 @@
+\section{Discusión y conclusiones}
+
+La principal contribución del trabajo no se limita al entrenamiento de un detector o un clasificador, sino a la construcción de una arquitectura coherente que conecta adquisición, metadatos, inferencia, visualización y análisis temporal. Esta integración conserva trazabilidad entre imagen original, recorte, predicción y consulta posterior, condición esencial para aplicaciones científicas y educativas \citep{scherrer2012hmi,noaaSRS,camporeale2019ml}.
+
+El enfoque jerárquico resulta apropiado para la taxonomía Zurich--McIntosh porque respeta su estructura observacional y evita una clasificación plana de combinaciones. Sin embargo, el desbalance de clases, la ambigüedad morfológica y la dependencia de recortes bien localizados siguen siendo limitaciones relevantes para clases raras o configuraciones visualmente cercanas \citep{mcintosh1990classification,bornmann1994flarerates,cui2019classbalanced}.
+
+La ejecución local y la conversión de modelos a ONNX refuerzan la portabilidad del sistema, especialmente en observatorios con conectividad limitada. Esta capacidad permite procesar cerca del punto de captura, reducir latencia y mantener consulta posterior mediante una plataforma web, sin depender completamente de infraestructura centralizada \citep{ultralyticsYOLO26,woo2023convnextv2,raspberryPi5Docs2026}.
+
+Se concluye que el prototipo constituye una base funcional para observación solar asistida por inteligencia artificial en entornos académicos locales. Como trabajos futuros se propone ampliar campañas de validación, mejorar calibración y control de exposición, incorporar más datos propios, fortalecer la estimación heliográfica y refinar los modelos predictivos \citep{cesarHeliographic,podladchikova2012kalman,schmid2010dmd}.

@@ -1,0 +1,12 @@
+\section{Diseño del hardware}
+
+El hardware se estructura en una unidad de procesamiento embebido basada en Raspberry Pi 5, encargada de adquisición, preprocesamiento, comunicación local y soporte de interacción. La elección responde a su disponibilidad, capacidad de cómputo, soporte de periféricos y facilidad de integración en un módulo portátil de observación \citep{raspberryPi5Docs2026,nmcliHotspot2026}.
+
+
+El sistema de captura integra la cámara monocromática, el tren óptico de observación en luz blanca y la cuña de Herschel como elemento de atenuación segura. Esta configuración busca preservar contraste en umbra y penumbra, evitar saturación y mantener condiciones compatibles con el procesamiento automático posterior \citep{zwoASI174Manual2025,luntWhiteLightWedges2026,baaderHerschelUsage2026}.
+
+La unidad local incorpora visualización de estado y conectividad de red para facilitar operación en campo. La pantalla OLED se conecta mediante una interfaz I2C simple. Esta decisión reduce dependencia de una consola externa durante tareas de captura y verificación \citep{raspberryPi5Docs2026,nmcliHotspot2026}.
+
+La carcasa y los soportes impresos en 3D cumplen una función operativa: protegen el nodo de procesamiento, ordenan el cableado, permiten ventilación y facilitan el montaje en campañas observacionales. El resultado es una estación compacta que puede operar como módulo de adquisición en observatorios locales \citep{raspberryPi5Docs2026,zwoASILinuxManual}.
+
+

@@ -1,0 +1,307 @@
+\chapter[Discusión y conclusiones]{Discusión y conclusiones\label{cap:discusion}}
+
+\section{Discusión}
+
+\label{sec:discussion}
+
+El desarrollo presentado en esta tesis debe interpretarse como la integración de
+un flujo observacional completo, y no únicamente como la suma de modelos de
+aprendizaje profundo evaluados de forma aislada. A lo largo del trabajo se
+articulan decisiones instrumentales, criterios de construcción de datos,
+modelos de visión por computadora, herramientas predictivas y mecanismos de
+despliegue local y web, siguiendo la arquitectura metodológica formulada en el
+Capítulo~\ref{cap:consideraciones}, implementada en el Capítulo~\ref{cap:software}
+y validada en el Capítulo~\ref{cap:resultados}. Esta perspectiva resulta importante
+porque el problema de análisis automático de manchas solares no se limita a
+reconocer patrones en una imagen: exige capturar observaciones de manera
+reproducible, asociarlas con metadatos físicos, preservar trazabilidad, ejecutar
+inferencia en condiciones de campo y ofrecer resultados interpretables para el
+usuario.
+
+Desde el punto de vista instrumental, la selección de una cadena óptica basada en
+observación de luz blanca, cámara monocromática y atenuación mediante cuña de
+Herschel responde a un compromiso entre seguridad, resolución, portabilidad y
+viabilidad operativa. La ZWO ASI174MM Mini ofrece un sensor de área suficiente,
+píxeles relativamente grandes, obturador global y compatibilidad práctica con
+entornos Linux, rasgos adecuados para una estación de observación local. La
+Raspberry Pi 5, por su parte, permite concentrar adquisición, preprocesamiento,
+conectividad y servicios locales en una unidad compacta. Esta combinación,
+discutida en el diseño instrumental y validada físicamente en el
+Capítulo~\ref{cap:resultados}, no pretende competir con observatorios solares
+profesionales, sino demostrar que un observatorio académico o local puede
+incorporar una capa de asistencia computacional moderna sin requerir
+infraestructura de gran escala \citep{zwoASI174Manual2025,luntWhiteLightWedges2026,raspberryPi5Docs2026}.
+
+La discusión de hardware también revela una restricción central del sistema: la
+calidad de la inferencia depende de la estabilidad de la adquisición. Condiciones
+como el \textit{seeing}, la nubosidad, el enfoque, la exposición y la ganancia de
+la cámara condicionan la nitidez de umbra y penumbra, y por tanto afectan tanto
+la detección de grupos como la clasificación morfológica. Por ello, el
+preprocesamiento local, el control de parámetros de captura y la verificación de
+estado mediante panel local no son accesorios secundarios, sino componentes
+necesarios para sostener la calidad de los datos que alimentan los modelos. Esta
+lectura es coherente con las limitaciones de validación señaladas en el
+Capítulo~\ref{cap:resultados}, donde se reconoce que las campañas observacionales
+están condicionadas por clima, ventana horaria solar y estabilidad instrumental.
+
+En relación con los datos de entrenamiento, una de las decisiones metodológicas
+más relevantes fue utilizar imágenes SDO/HMI acopladas con reportes NOAA SRS para
+construir conjuntos etiquetados, como se detalla en la
+Sección~\ref{sec:data-software}. Esta elección se justifica por la disponibilidad
+temporal, la regularidad instrumental y la existencia de metadatos taxonómicos
+asociados \citep{scherrer2012hmi,noaaSRS}. Sin embargo, también introduce
+una tensión metodológica: el sistema
+final está orientado a imágenes de luz blanca obtenidas localmente, mientras que
+el entrenamiento se apoya en una modalidad espacial fotosférica distinta. La
+similitud morfológica entre HMI y luz blanca permite sostener esta aproximación
+como punto de partida razonable, pero no elimina la necesidad de validar la
+transferencia entre instrumentos. En consecuencia, los resultados obtenidos deben
+leerse como una validación funcional y metodológica del flujo, no como una
+caracterización definitiva del rendimiento sobre todos los escenarios de
+observación terrestre.
+
+La separación entre agrupamiento y clasificación constituye otro aspecto central
+de la propuesta. Esta estrategia en cascada fue formalizada en la
+Sección~\ref{sec:arquitectura-dl-cascada} e implementada en la
+Sección~\ref{sec:training}. El detector YOLO26n opera sobre imágenes de disco
+completo y tiene como objetivo localizar grupos solares, mientras que el
+clasificador basado en ConvNeXtV2 Atto trabaja sobre recortes normalizados y
+estima las componentes Zurich--McIntosh \citep{ultralyticsYOLO26,woo2023convnextv2}.
+La variante Atto fue seleccionada para preservar la integridad de la red durante
+la transformación desde PyTorch hacia ONNX y para sostener un despliegue ligero.
+Sobre este backbone se inyectan etapas complementarias basadas en MLP que
+implementan el aprendizaje jerárquico entre las salidas $Z$, $P$ y $C$.
+Esta división reduce la complejidad de cada tarea y se alinea
+con la lógica observacional: primero se identifica la unidad física relevante,
+el grupo solar, y luego se describe su morfología. Los resultados de detección,
+con precisión del orden del 83\%, indican que la primera etapa alcanza un punto
+de operación suficiente para alimentar la cadena posterior. No obstante, los
+errores de localización siguen siendo críticos, ya que un recorte incompleto,
+descentrado o contaminado puede degradar la clasificación aunque el clasificador
+sea correcto en condiciones ideales.
+
+La clasificación jerárquica Zurich--McIntosh muestra un comportamiento
+competitivo frente a referencias recientes. Según la comparación de la
+Tabla~\ref{tab:comparativa-baselines}, el F1 promedio de 0.66 se aproxima a los
+mejores valores considerados, aun sin recurrir a compactación artificial de
+clases ni a ensambles de modelos
+\citep{palladino2022sunspot,sayez2023sunscc,deng2025mcintosh}. Esta
+comparación es relevante porque la
+propuesta conserva la estructura taxonómica completa y mantiene salidas
+separadas para $Z$, $P$ y $C$. Desde el punto de vista científico, esta decisión
+favorece la interpretabilidad: el sistema no solo entrega una etiqueta final,
+sino que permite observar cómo se distribuye la probabilidad entre alternativas
+compatibles. El árbol bayesiano y el top 12 de recomendaciones, presentados en
+las Figuras~\ref{fig:resultados-arbol-top12-zpc} y~\ref{fig:resultados-top12-zpc},
+implementan la normalización bayesiana descrita en la
+Sección~\ref{sec:classification}; por ello, la salida puede funcionar como una
+herramienta de asistencia, ofreciendo una clase principal y alternativas
+plausibles cuando existen configuraciones cercanas.
+
+El desbalance de clases sigue siendo una de las principales limitaciones. La
+taxonomía Zurich--McIntosh presenta una distribución de cola larga: pocas
+combinaciones concentran gran parte de los ejemplos y muchas clases aparecen de
+forma escasa. Esta lectura se apoya en la distribución de DB2 y en las matrices
+de confusión por componente, sin requerir un análisis cualitativo separado de
+casos particulares. La estructura observada afecta especialmente a
+configuraciones raras o morfológicamente ambiguas. Además, las fronteras entre
+ciertas clases no siempre son nítidas incluso para observadores humanos, lo que
+introduce ruido de etiqueta difícil de eliminar por completo. En este contexto,
+la estrategia jerárquica y la máscara de combinaciones válidas ayudan a
+restringir el espacio de salida, pero no sustituyen la necesidad de ampliar y
+depurar los datos.
+
+Los modelos predictivos incorporados cumplen una función complementaria. El
+modelo PVL con filtro de Kalman ofrece una trayectoria escalar suavizada del
+número de manchas solares, mientras que el modelo DMD introduce una visión
+espacio-temporal de la migración latitudinal, de acuerdo con la formalización de
+la Sección~\ref{sec:forecast}. Los errores MAPE reportados en la
+Tabla~\ref{tab:ssn-metrics-comparison} indican que el enfoque PVLK resulta más
+preciso en términos escalares, pero las métricas de la Tabla~\ref{tab:sporer-performance}
+muestran que el modelo DMD aporta información física adicional al representar la
+distribución latitudinal y su desplazamiento hacia el ecuador
+\citep{kalman1960newapproach,podladchikova2012kalman,schmid2010dmd,kutz2016dmd}.
+Esta diferencia ilustra un aspecto importante
+del sistema: no todos los módulos deben optimizar la misma métrica. En algunos
+casos, una representación menos precisa en un índice global puede ser más rica
+para interpretación científica si conserva estructura espacial o temporal.
+
+La plataforma web y el despliegue ONNX completan la dimensión operativa del
+trabajo, desarrollada en la Sección~\ref{sec:web}. Al convertir los modelos a
+ONNX y ejecutarlos mediante mecanismos compatibles con navegador o dispositivos
+locales, la tesis reduce la dependencia de un servidor central de inferencia. El
+peso conjunto de los modelos ONNX, cercano a 24~MB, resulta especialmente
+conveniente para descarga y actualización en entornos de conectividad limitada.
+Esto mejora portabilidad, disminuye la latencia y permite que parte del
+procesamiento ocurra cerca del lugar de captura.
+La integración con base de datos y almacenamiento en la nube añade trazabilidad:
+las imágenes, metadatos, recortes e inferencias pueden consultarse posteriormente,
+compararse y auditarse. Esta trazabilidad es especialmente importante en un
+contexto científico, donde cada resultado debe poder asociarse con su fecha,
+origen instrumental y etapa de procesamiento.
+
+La validación integral confirma que el prototipo no quedó limitado a una prueba
+de laboratorio. Las evidencias de integración física, operación local, acceso web,
+procesamiento ONNX y visualización de resultados, reunidas en el
+Capítulo~\ref{cap:resultados}, muestran que la arquitectura puede ejecutarse como
+sistema funcional. Sin embargo, la validación de campo aún
+es acotada. Falta evaluar el rendimiento durante campañas observacionales más
+largas, bajo diferentes condiciones atmosféricas, con variaciones de enfoque y
+exposición, y con una muestra mayor de imágenes capturadas directamente por el
+prototipo. Esta etapa será decisiva para cuantificar la robustez real del sistema
+en el dominio de aplicación final.
+
+En síntesis, la principal contribución de la tesis no radica únicamente en haber
+entrenado un detector o un clasificador, sino en haber construido una arquitectura
+coherente que conecta adquisición, datos, modelos, inferencia, visualización y
+análisis. El sistema conserva vínculos explícitos con la interpretación solar:
+localiza grupos, predice componentes de una taxonomía observacional, restringe
+combinaciones inválidas, modela tendencias temporales y mantiene trazabilidad de
+los productos generados. Estas características lo convierten en una base sólida
+para futuras extensiones hacia observación solar asistida en entornos académicos
+y observatorios locales.
+
+\section{Conclusiones}
+
+\label{sec:conclusion}
+
+Esta tesis presentó un prototipo integral para la detección, clasificación y
+análisis predictivo de manchas solares mediante visión computacional e
+inteligencia artificial. El sistema propuesto combina una arquitectura de
+adquisición local, una cadena de datos basada en imágenes SDO/HMI y registros
+NOAA SRS, modelos de aprendizaje profundo para agrupamiento y clasificación, y
+herramientas de análisis temporal orientadas al número de manchas solares y a la
+distribución latitudinal de la actividad. La propuesta queda articulada entre el
+diseño metodológico del Capítulo~\ref{cap:consideraciones}, la implementación del
+Capítulo~\ref{cap:software} y la validación del Capítulo~\ref{cap:resultados}.
+
+En relación con el diseño instrumental, se definió una configuración viable para
+observación solar de luz blanca basada en cámara monocromática, cuña de Herschel,
+Raspberry Pi 5, pantalla local de estado, conectividad y carcasa de protección,
+coherente con los criterios de selección técnica discutidos en el
+Capítulo~\ref{cap:consideraciones}.
+Esta configuración permite articular captura, preprocesamiento y sincronización
+de datos en un dispositivo compacto. La selección de componentes respondió a
+criterios de compatibilidad, portabilidad, seguridad óptica y capacidad de
+operación local.
+
+Respecto a la construcción de datos, se estableció un flujo de acoplamiento entre
+imágenes HMI y reportes NOAA SRS para generar etiquetas útiles para entrenamiento
+supervisado. Este procedimiento permitió construir una base para detección de
+grupos solares y otra para clasificación Zurich--McIntosh. La tesis reconoce que
+esta solución responde a una restricción práctica de disponibilidad de datos:
+aunque el objetivo aplicado son imágenes de luz blanca, el entrenamiento se apoyó
+en HMI por su cobertura temporal, estabilidad y relación con registros
+catalográficos.
+
+En la etapa de detección, el modelo YOLO26n alcanzó un desempeño adecuado para
+localizar regiones activas sobre imágenes de disco completo, según la evaluación
+resumida en la Sección~\ref{sec:results}. Su función dentro
+del sistema no es segmentar detalles finos, sino producir candidatos espaciales
+consistentes para el clasificador. Esta decisión resultó apropiada para una
+arquitectura en cascada, donde cada módulo resuelve una parte específica del
+problema observacional.
+
+En la etapa de clasificación, la arquitectura basada en ConvNeXtV2 Atto y salidas
+jerárquicas para $Z$, $P$ y $C$ mostró un rendimiento competitivo frente a
+trabajos recientes y mantuvo correspondencia con la formulación probabilística de
+la Sección~\ref{sec:classification}. La incorporación de etapas MLP
+complementarias permitió inyectar la dependencia jerárquica entre componentes sin
+comprometer la exportación íntegra del modelo desde PyTorch hacia ONNX. El F1
+promedio de 0.66 confirma que la propuesta puede
+aproximarse al estado del arte manteniendo interpretabilidad y sin recurrir a
+compactación artificial de clases. La incorporación de restricciones
+probabilísticas y combinaciones taxonómicas válidas permite transformar la salida
+del modelo en una recomendación más útil para revisión humana.
+
+En cuanto al análisis predictivo, los modelos PVLK y DMD aportan perspectivas
+complementarias, consistentes con la formulación de la Sección~\ref{sec:forecast}. PVLK ofrece una estimación escalar más precisa del número de
+manchas solares suavizado, mientras que DMD permite reconstruir la dinámica
+latitudinal asociada al diagrama de Spörer. Estos módulos no deben interpretarse
+como sistemas operacionales de pronóstico espacial, sino como herramientas de
+apoyo exploratorio integradas dentro de la plataforma.
+
+La conversión de modelos a ONNX y su despliegue en una plataforma web muestran,
+como se describe en la Sección~\ref{sec:web}, que el sistema puede trascender el
+entorno de entrenamiento. El tamaño conjunto cercano a 24~MB hace viable la
+distribución de los modelos incluso en escenarios de conectividad limitada. La
+ejecución local o en cliente reduce dependencias, mejora la portabilidad y
+fortalece la autonomía del prototipo. La integración con base de datos y
+almacenamiento remoto permite
+conservar trazabilidad completa entre imagen, metadatos, detección,
+clasificación e historial de observación.
+
+Por tanto, se concluye que la separación modular entre adquisición,
+preprocesamiento, detección, clasificación, predicción y visualización constituye
+una estrategia adecuada para el análisis asistido de manchas solares. El trabajo
+cumple su objetivo principal al demostrar la viabilidad técnica de un sistema
+integrado para observación solar local, con capacidad de procesamiento
+inferencial y soporte interpretativo. Sus limitaciones principales se relacionan
+con la transferencia HMI--luz blanca, el desbalance de clases, el ruido de
+etiquetado, la validación de campo aún acotada por condiciones climáticas y
+ventanas horarias de observación, y la necesidad de ampliar la base de datos con
+observaciones propias.
+
+\section{Trabajos futuros}
+
+Los resultados obtenidos abren varias líneas de continuidad. La primera y más
+importante es la construcción de una base de imágenes de luz blanca etiquetada a
+partir de observaciones locales. Esta base debería incluir imágenes capturadas en
+distintas condiciones atmosféricas, con diferentes configuraciones de exposición,
+ganancia y enfoque, y con anotaciones verificadas por expertos o mediante revisión
+asistida. Con ello sería posible medir de forma directa la transferencia entre el
+entrenamiento HMI--SRS y el dominio instrumental final de luz blanca.
+
+Una segunda línea consiste en mejorar la curación de etiquetas. El uso de
+Roboflow para revisar cajas y corregir anotaciones automáticas puede ampliarse
+mediante protocolos de doble revisión, medición de acuerdo entre observadores y
+registro explícito de incertidumbre en etiquetas ambiguas. En lugar de tratar la
+etiqueta como una verdad única, futuros trabajos podrían representar la
+incertidumbre morfológica como una distribución de clases, especialmente en
+fronteras difíciles entre configuraciones Zurich--McIntosh.
+
+También será necesario profundizar el manejo del desbalance. Entre las opciones
+posibles se encuentran muestreo estratificado, pérdidas focales, ponderación por
+frecuencia efectiva, generación controlada de aumentos para clases raras y
+esquemas de aprendizaje métrico. Otra alternativa es definir niveles de operación
+según el uso: una clasificación completa para análisis detallado y una versión
+compactada para escenarios donde se priorice robustez sobre granularidad.
+
+En el plano del modelado visual, futuras versiones podrían comparar ConvNeXtV2
+con arquitecturas más recientes, incluyendo modelos híbridos CNN--Transformer,
+redes ligeras optimizadas para dispositivos de borde y estrategias de aprendizaje
+auto-supervisado. También sería valioso incorporar información multibanda o
+magnetográfica cuando esté disponible, ya que la clasificación morfológica en luz
+blanca puede beneficiarse de señales complementarias sobre complejidad magnética.
+
+Para el detector, una extensión natural consiste en evaluar modelos exportados a
+ONNX directamente sobre Raspberry Pi 5 y en navegador bajo diferentes cargas de
+trabajo. Deberían medirse latencia, uso de memoria, consumo energético,
+estabilidad térmica y comportamiento durante sesiones prolongadas. Esta
+caracterización permitiría transformar la validación funcional actual en una
+validación cuantitativa del desempeño embebido.
+
+En cuanto a los modelos predictivos, el bloque PVLK puede extenderse incorporando
+actualización en línea con observaciones recientes, estimación explícita de
+intervalos de confianza y comparación con modelos estadísticos alternativos. El
+bloque DMD puede enriquecerse con variantes multirresolución, DMD con control,
+DMD kernelizado o modelos no lineales que preserven la estructura latitudinal del
+diagrama de mariposa. Una línea particularmente interesante sería combinar la
+salida escalar del SSN con la dinámica latitudinal para generar indicadores
+conjuntos de actividad.
+
+Desde la perspectiva de plataforma, futuros trabajos deberían fortalecer la
+interfaz de revisión humana. Esto incluye mostrar incertidumbre, alternativas top
+$k$, historial de inferencias, comparación entre observaciones de distintas
+fechas y herramientas para corregir manualmente resultados. Cada corrección
+podría reingresar al sistema como dato validado, habilitando un ciclo de mejora
+continua mediante aprendizaje activo.
+
+Finalmente, se propone ampliar la validación institucional del prototipo mediante
+campañas coordinadas con observatorios locales. Estas campañas permitirían
+comparar observaciones del sistema con registros profesionales, evaluar
+reproducibilidad, medir sensibilidad ante condiciones atmosféricas y consolidar
+un protocolo de uso. Con estas extensiones, el prototipo podría evolucionar desde
+una prueba funcional de tesis hacia una herramienta estable de apoyo para
+observación solar, formación académica y generación de datos heliográficos
+locales.

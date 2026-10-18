@@ -1,0 +1,63 @@
+\pdfminorversion=4
+\pdfobjcompresslevel=0
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=1cm,bottom=2.5cm,includehead,headheight=2.1cm,headsep=0.5cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{helvet}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7\baselineskip}
+\justifying
+\graphicspath{{../figures/}}
+
+\newcommand{\institutionalheader}{%
+    \parbox[c][1.8cm][c]{0.30\textwidth}{\centering
+        \includegraphics[width=\linewidth,height=1.45cm,keepaspectratio,trim=88bp 124bp 47bp 117bp,clip]{DGICT_logo.png}}%
+    \hfill
+    \parbox[c][1.8cm][c]{0.30\textwidth}{\centering
+        \includegraphics[width=3.5cm,height=1.45cm,keepaspectratio]{una_logo.png}}%
+    \hfill
+    \parbox[c][1.8cm][c]{0.30\textwidth}{\centering
+        \includegraphics[width=\linewidth,height=1.75cm,keepaspectratio,trim=26bp 33bp 27bp 37bp,clip]{V1 - Color PT-BR PNG.png}}%
+}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\headruleskip}{1.5mm}
+\fancyhead[C]{\institutionalheader}
+
+\begin{document}
+
+\begin{center}
+Ingeniería y Tecnología
+
+\textbf{Desarrollo de un Prototipo de Procesamiento Local para la Detección, Clasificación y Análisis Predictivo de Manchas Solares mediante Visión Computacional e Inteligencia Artificial}
+
+Autor: Benítez, Carlos\textsuperscript{1}
+
+Orientadores: Cabral, Juan\textsuperscript{2}; Stalder, Diego\textsuperscript{1}; Gómez, José María\textsuperscript{2}; Schaerer, Christian\textsuperscript{2}; Núñez, Jesús\textsuperscript{1}
+
+\textsuperscript{1}Facultad de Ingeniería, Universidad Nacional de Asunción
+
+\textsuperscript{2}Facultad Politécnica, Universidad Nacional de Asunción
+\end{center}
+
+\textbf{Resumen:}
+
+El presente trabajo desarrolla un prototipo funcional para la detección, clasificación y análisis predictivo local de manchas solares mediante visión computacional e inteligencia artificial. El sistema integra una cadena de procesamiento que vincula captura heliográfica en luz blanca, registro de metadatos, sincronización con base de datos, inferencia local y visualización web. La cadena de procesamiento incorpora YOLO26n para el agrupamiento de regiones activas, un modelo jerárquico basado en ConvNeXtV2a para clasificación Zurich--McIntosh que preserva dependencias semánticas entre $Z$, $P$ y $C$, y módulos predictivos complementarios para el número de manchas solares mediante un filtro PVL--Kalman y para la distribución latitudinal de la actividad mediante Descomposición en Modos Dinámicos aplicada al diagrama de Spörer. El prototipo fue validado mediante métricas experimentales sobre un conjunto de datos construido a partir de imágenes SDO/HMI, reportes NOAA SRS y registros propios, además de pruebas de operación embebida, inferencia ONNX y consistencia taxonómica. Los resultados muestran que la arquitectura propuesta permite observaciones solares trazables, portables e interpretables en observatorios académicos locales.
+
+\begingroup
+\RaggedRight
+\textbf{Palabras clave:} manchas solares; visión computacional; inteligencia artificial;\\
+Zurich--McIntosh; Raspberry Pi 5.
+\par
+\endgroup
+
+\end{document}
